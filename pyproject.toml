@@ -1,0 +1,7 @@
+[project]
+name = "composition-and-aggregation"
+version = "0.1.0"
+description = "Online store management system demonstrating OOP principles (composition, aggregation, polymorphism, encapsulation) and SOLID patterns"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
