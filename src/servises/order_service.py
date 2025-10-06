@@ -42,6 +42,15 @@ class OrderService:
         order = order_dto.to_model(customer, cart_items)
         saved_order = self._order_repository.add(order)
 
+        try:
+            saved_order.process_payment()
+            saved_order.status = OrderStatus.PROCESSING
+            self._order_repository.update(saved_order)
+        except Exception as e:
+            saved_order.status = OrderStatus.CANCELLED
+            self._order_repository.update(saved_order)
+            raise ValueError(f"Payment processing failed: {str(e)}")
+
         return OrderResultDTO.from_model(saved_order)
 
     def get_order(self, order_id: int) -> OrderResultDTO | None:

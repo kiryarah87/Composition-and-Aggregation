@@ -223,6 +223,7 @@ class OrderResultDTO:
     delivery_cost: float
     total_amount: float
     status: OrderStatus
+    payment_method: PaymentDTO
 
     @classmethod
     def from_model(cls, order: Order) -> 'OrderResultDTO':
@@ -238,6 +239,9 @@ class OrderResultDTO:
         delivery_cost = order.delivery.cost() if order.delivery else 0
         total = subtotal - discount_amount + delivery_cost
 
+        if order.payment:
+            payment_method = type(order.payment).__name__.replace('Payment', '')
+
         return cls(
             order_id=order.order_id,
             customer_name=order.customer.name,
@@ -246,5 +250,6 @@ class OrderResultDTO:
             discount_amount=discount_amount,
             delivery_cost=delivery_cost,
             total_amount=total,
-            status=order.status
+            status=order.status,
+            payment_method=payment_method
         )
