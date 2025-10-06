@@ -72,7 +72,7 @@ class Order:
     def calculate_total(self) -> float:
         '''Calculates the total cost of the order'''
         subtotal = self._calculate_subtotal()
-        discount_amount = self.discount.apply(subtotal)
+        discount_amount = self.discount.apply(subtotal) if self.discount else 0
         delivery_cost = self._delivery.cost() if self._delivery else 0
         return subtotal - discount_amount + delivery_cost
 

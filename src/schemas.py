@@ -70,7 +70,8 @@ class CustomerDTO:
     def to_model(self) -> Customer:
         customer = Customer(self.id, self.name, self.email)
         for addr_dto in self.addresses:
-            customer.add_address(addr_dto.street, addr_dto.city, addr_dto.country)
+            customer.add_address(
+                addr_dto.street, addr_dto.city, addr_dto.country)
         return customer
 
 
@@ -179,7 +180,7 @@ class BankTransferPaymentDTO(PaymentDTO):
     """DTO for bank transfer payment"""
 
     def to_model(self) -> BankTransferPayment:
-        return BankTransferPayment(self.details)
+        return BankTransferPayment()
 
 
 @dataclass
@@ -231,16 +232,20 @@ class OrderResultDTO:
         items_dto = []
         for order_item in order.items:
             product_dto = ProductDTO.from_model(order_item.product)
-            cart_item_dto = CartItemDTO(product=product_dto, quantity=order_item.quantity)
+            cart_item_dto = CartItemDTO(
+                product=product_dto, quantity=order_item.quantity)
             items_dto.append(cart_item_dto)
 
-        subtotal = sum(item.product.price * item.quantity for item in order.items)
-        discount_amount = order.discount.apply(subtotal) if order.discount else 0
+        subtotal = sum(item.product.price *
+                       item.quantity for item in order.items)
+        discount_amount = order.discount.apply(
+            subtotal) if order.discount else 0
         delivery_cost = order.delivery.cost() if order.delivery else 0
         total = subtotal - discount_amount + delivery_cost
 
         if order.payment:
-            payment_method = type(order.payment).__name__.replace('Payment', '')
+            payment_method = type(
+                order.payment).__name__.replace('Payment', '')
 
         return cls(
             order_id=order.order_id,
