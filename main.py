@@ -173,6 +173,7 @@ class DemoRunner:
         logger.info(f"Order #{order_result.order_id} created successfully!")
         logger.info(f"Customer: {order_result.customer_name}")
         logger.info(f"Status: {order_result.status}")
+        logger.info(f"Payment Method: {order_result.payment_method}")
         logger.info("Order items:")
 
         for item in order_result.items:
@@ -187,6 +188,7 @@ class DemoRunner:
         logger.info(f"{'Delivery:':<50} ${order_result.delivery_cost:>8.2f}")
         logger.info(f"{'-'*60}")
         logger.info(f"{'TOTAL:':<50} ${order_result.total_amount:>8.2f}")
+        logger.info(f"{'Payment processed via ' + order_result.payment_method}")
 
     def display_all_orders(self) -> None:
         """Отображение всех заказов в системе"""
