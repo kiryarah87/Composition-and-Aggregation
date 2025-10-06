@@ -105,7 +105,7 @@ def sample_paypal_payment():
 @pytest.fixture
 def sample_bank_transfer_payment():
     """Создает банковский перевод."""
-    return BankTransferPayment()
+    return BankTransferPayment("1234567890")
 
 
 @pytest.fixture

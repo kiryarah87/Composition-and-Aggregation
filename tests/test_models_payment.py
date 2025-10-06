@@ -26,7 +26,7 @@ class TestBankTransferPayment:
 
     def test_bank_transfer_payment_creation(self):
         """Тест создания банковского перевода."""
-        payment = BankTransferPayment()
+        payment = BankTransferPayment("1234567890")
         assert isinstance(payment, BankTransferPayment)
 
     def test_bank_transfer_payment_pay(self, sample_bank_transfer_payment, capsys):
@@ -83,7 +83,7 @@ class TestPaymentAbstract:
         """Тест полиморфизма платежных методов."""
         payments = [
             CreditCardPayment("1111-2222-3333-4444"),
-            BankTransferPayment(),
+            BankTransferPayment("1234567890"),
             PayPalPayment("test@example.com")
         ]
 

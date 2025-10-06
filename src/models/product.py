@@ -27,7 +27,7 @@ class Category:
 
     @property
     def products(self) -> list[Product]:
-        return self._products
+        return self._products.copy()
 
     def add_product(self, product: Product):
         if product not in self._products:
