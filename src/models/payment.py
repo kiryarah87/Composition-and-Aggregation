@@ -21,5 +21,8 @@ class BankTransferPayment(Payment):
 
 
 class PayPalPayment(Payment):
+    def __init__(self, e_mail: str):
+        self.e_mail = e_mail
+
     def pay(self, amount: float):
         print(f"Paid {amount} using PayPal")

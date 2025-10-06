@@ -1,6 +1,5 @@
-from models.order import Warehouse
-from models.product import Product
-``
+from ..models import Warehouse, Product
+
 
 class WarehouseRepository:
     def __init__(self):

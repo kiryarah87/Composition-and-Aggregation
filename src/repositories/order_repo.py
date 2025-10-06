@@ -1,4 +1,4 @@
-from models.order import Order
+from ..models import Order
 
 
 class OrderRepository:
@@ -6,12 +6,12 @@ class OrderRepository:
         self._orders: dict[int, Order] = {}
         self._next_id: int = 1
 
-    def add(self, order: Order) -> int:
+    def add(self, order: Order) -> Order:
         '''Adds a new order to the repository and returns its ID.'''
-        order_id = self._next_id
-        self._orders[order_id] = order
+        order.order_id = self._next_id
+        self._orders[order.order_id] = order
         self._next_id += 1
-        return order_id
+        return order
 
     def get_by_id(self, order_id: int) -> Order | None:
         '''Retrieves an order by its ID.'''
@@ -27,3 +27,11 @@ class OrderRepository:
     def get_all(self) -> list[Order]:
         '''Retrieves all orders in the repository.'''
         return list(self._orders.values())
+
+    def update(self, order: Order) -> Order:
+        '''Updates an existing order in the repository.'''
+        if order.order_id not in self._orders:
+            raise ValueError(f"Order with id {order.order_id} not found")
+
+        self._orders[order.order_id] = order
+        return order

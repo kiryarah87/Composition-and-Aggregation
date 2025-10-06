@@ -12,28 +12,48 @@ class Order:
         self,
         customer: Customer,
         cart_items: list[CartItem],
-        discount: Discount
     ):
         self.customer = customer
         self.items: list[OrderItem] = [
             OrderItem(item.product, item.quantity) for item in cart_items
         ]
-        self.discount = discount
+
+        self.status: str = 'pending'
+        self._order_id: int | None = None
+        self._discount: Discount | None = None
         self._delivery: Delivery | None = None
         self._payment: Payment | None = None
+
+    @property
+    def order_id(self) -> int | None:
+        return self._order_id
+
+    @order_id.setter
+    def order_id(self, value: int) -> None:
+        if value <= 0:
+            raise ValueError("Order ID must be positive")
+        self._order_id = value
+
+    @property
+    def discount(self) -> Discount | None:
+        return self._discount
+
+    @discount.setter
+    def discount(self, discount: Discount) -> None:
+        self._discount = discount
 
     @property
     def delivery(self) -> Delivery | None:
         return self._delivery
 
-    @property
-    def payment(self) -> Payment | None:
-        return self._payment
-
     @delivery.setter
     def delivery(self, delivery: Delivery) -> None:
         '''Sets the delivery method for the order'''
         self._delivery = delivery
+
+    @property
+    def payment(self) -> Payment | None:
+        return self._payment
 
     @payment.setter
     def payment(self, payment: Payment) -> None:
