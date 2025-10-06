@@ -49,7 +49,7 @@ class OrderService:
         except Exception as e:
             saved_order.status = OrderStatus.CANCELLED
             self._order_repository.update(saved_order)
-            raise ValueError(f"Payment processing failed: {str(e)}")
+            raise ValueError(f"Payment processing failed: {str(e)}") from e
 
         return OrderResultDTO.from_model(saved_order)
 
