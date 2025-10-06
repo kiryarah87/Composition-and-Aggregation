@@ -224,7 +224,7 @@ class OrderResultDTO:
     delivery_cost: float
     total_amount: float
     status: OrderStatus
-    payment_method: PaymentDTO
+    payment_method: str
 
     @classmethod
     def from_model(cls, order: Order) -> 'OrderResultDTO':
