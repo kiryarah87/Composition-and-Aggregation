@@ -6,14 +6,8 @@ from typing import Any
 class DataLoader:
     """Utility class for loading data from JSON files"""
 
-    def __init__(self, data_dir: str | Path = None):
-        """
-        Initialize DataLoader
-
-        Args:
-            data_dir: Path to directory with JSON files.
-                     If None, uses default 'data' directory in project root
-        """
+    def __init__(self, data_dir: str | Path):
+        """Initialize DataLoader with directory containing JSON files"""
         if data_dir is None:
             raise ValueError("data_dir must be provided")
 
