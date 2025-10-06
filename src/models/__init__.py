@@ -4,7 +4,7 @@ from .product import Product, Category
 from .cart import ShoppingCart, CartItem
 from .discount import PercentageDiscount, FixedDiscount
 from .delivery import StandardDelivery, ExpressDelivery
-from .payment import CreditCardPayment, BankTransferPayment, PayPalPayment
+from .payment import CreditCardPayment, BankTransferPayment, PayPalPayment, Payment
 
 
 __all__ = [
@@ -22,4 +22,5 @@ __all__ = [
     "CreditCardPayment",
     "BankTransferPayment",
     "PayPalPayment",
+    "Payment",
 ]

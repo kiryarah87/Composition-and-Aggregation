@@ -6,6 +6,9 @@ class Payment(ABC):
     def pay(self, amount: float):
         pass
 
+    def __str__(self) -> str:
+        return f"{self.__class__.__name__}"
+
 
 class CreditCardPayment(Payment):
     def __init__(self, card_number: str):
@@ -16,6 +19,9 @@ class CreditCardPayment(Payment):
 
 
 class BankTransferPayment(Payment):
+    def __init__(self, bank_account: str):
+        self.bank_account = bank_account
+
     def pay(self, amount: float):
         print(f"Paid {amount} via bank transfer")
 

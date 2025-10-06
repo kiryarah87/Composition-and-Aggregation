@@ -12,6 +12,7 @@ from .models import (
     PayPalPayment,
     PercentageDiscount,
     FixedDiscount,
+    Payment,
 )
 from .enum import OrderStatus
 
@@ -180,7 +181,7 @@ class BankTransferPaymentDTO(PaymentDTO):
     """DTO for bank transfer payment"""
 
     def to_model(self) -> BankTransferPayment:
-        return BankTransferPayment()
+        return BankTransferPayment(self.details)
 
 
 @dataclass
@@ -224,7 +225,7 @@ class OrderResultDTO:
     delivery_cost: float
     total_amount: float
     status: OrderStatus
-    payment_method: PaymentDTO
+    payment_method: Payment | None = None
 
     @classmethod
     def from_model(cls, order: Order) -> 'OrderResultDTO':
@@ -233,19 +234,18 @@ class OrderResultDTO:
         for order_item in order.items:
             product_dto = ProductDTO.from_model(order_item.product)
             cart_item_dto = CartItemDTO(
-                product=product_dto, quantity=order_item.quantity)
+                product=product_dto, quantity=order_item.quantity
+            )
             items_dto.append(cart_item_dto)
 
-        subtotal = sum(item.product.price *
-                       item.quantity for item in order.items)
-        discount_amount = order.discount.apply(
-            subtotal) if order.discount else 0
+        subtotal = (
+            sum(item.product.price * item.quantity for item in order.items)
+        )
+        discount_amount = (
+            order.discount.apply(subtotal) if order.discount else 0
+        )
         delivery_cost = order.delivery.cost() if order.delivery else 0
         total = subtotal - discount_amount + delivery_cost
-
-        if order.payment:
-            payment_method = type(
-                order.payment).__name__.replace('Payment', '')
 
         return cls(
             order_id=order.order_id,
@@ -256,5 +256,5 @@ class OrderResultDTO:
             delivery_cost=delivery_cost,
             total_amount=total,
             status=order.status,
-            payment_method=payment_method
+            payment_method=order.payment
         )

@@ -7,7 +7,7 @@ class Product:
     ):
         self.product_id = product_id
         self.name = name
-        self._price = price
+        self.price = price
 
     @property
     def price(self):
@@ -27,7 +27,7 @@ class Category:
 
     @property
     def products(self) -> list[Product]:
-        return self._products.copy()
+        return self._products
 
     def add_product(self, product: Product):
         if product not in self._products:
