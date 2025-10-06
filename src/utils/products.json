@@ -1,0 +1,27 @@
+[
+  {
+    "product_id": 1,
+    "name": "Dell XPS 15 Laptop",
+    "price": 1500.0
+  },
+  {
+    "product_id": 2,
+    "name": "Logitech MX Master Mouse",
+    "price": 99.0
+  },
+  {
+    "product_id": 3,
+    "name": "Mechanical Keyboard",
+    "price": 150.0
+  },
+  {
+    "product_id": 4,
+    "name": "4K Monitor",
+    "price": 450.0
+  },
+  {
+    "product_id": 5,
+    "name": "Wireless Headphones",
+    "price": 250.0
+  }
+]
