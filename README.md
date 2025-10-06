@@ -43,8 +43,8 @@ cd Composition-and-Aggregation
 # Установка зависимостей
 uv sync
 
-# Запуск проекта
-uv run python main.py
+# Запуск демо проекта
+uv run main.py
 ```
 
 ### Работа с виртуальным окружением
