@@ -4,6 +4,7 @@ from .product import Product
 from .discount import Discount
 from .delivery import Delivery
 from .payment import Payment
+from ..enum import OrderStatus
 
 
 class Order:
@@ -18,7 +19,7 @@ class Order:
             OrderItem(item.product, item.quantity) for item in cart_items
         ]
 
-        self.status: str = 'pending'
+        self._status: OrderStatus = OrderStatus.PENDING
         self._order_id: int | None = None
         self._discount: Discount | None = None
         self._delivery: Delivery | None = None
@@ -33,6 +34,14 @@ class Order:
         if value <= 0:
             raise ValueError("Order ID must be positive")
         self._order_id = value
+
+    @property
+    def status(self) -> OrderStatus:
+        return self._status
+
+    @status.setter
+    def status(self, value: OrderStatus) -> None:
+        self._status = value
 
     @property
     def discount(self) -> Discount | None:

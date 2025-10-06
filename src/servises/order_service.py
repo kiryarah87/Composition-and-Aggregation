@@ -1,5 +1,6 @@
 from ..repositories import OrderRepository, ProductRepository, CustomerRepository
 from ..schemas import OrderCreateDTO, OrderResultDTO, CartItemDTO, ProductDTO
+from ..enum import OrderStatus
 
 
 class OrderService:
@@ -68,7 +69,7 @@ class OrderService:
         if not order:
             raise ValueError(f"Order with id {order_id} not found")
 
-        order.status = "cancelled"
+        order.status = OrderStatus.CANCELLED
         self._order_repository.update(order)
 
         return OrderResultDTO.from_model(order)

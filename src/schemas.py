@@ -13,6 +13,7 @@ from .models import (
     PercentageDiscount,
     FixedDiscount,
 )
+from .enum import OrderStatus
 
 
 @dataclass
@@ -221,7 +222,7 @@ class OrderResultDTO:
     discount_amount: float
     delivery_cost: float
     total_amount: float
-    status: str
+    status: OrderStatus
 
     @classmethod
     def from_model(cls, order: Order) -> 'OrderResultDTO':
@@ -245,5 +246,5 @@ class OrderResultDTO:
             discount_amount=discount_amount,
             delivery_cost=delivery_cost,
             total_amount=total,
-            status=getattr(order, 'status', 'pending')
+            status=order.status
         )
