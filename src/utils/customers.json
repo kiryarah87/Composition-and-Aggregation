@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "addresses": [
+      {
+        "street": "123 Main St",
+        "city": "New York",
+        "country": "USA"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "addresses": [
+      {
+        "street": "456 Oak Ave",
+        "city": "Los Angeles",
+        "country": "USA"
+      },
+      {
+        "street": "789 Pine Rd",
+        "city": "San Francisco",
+        "country": "USA"
+      }
+    ]
+  }
+]
